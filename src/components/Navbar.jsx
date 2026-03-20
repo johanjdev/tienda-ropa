@@ -1,17 +1,14 @@
 "use client"
 
-import link from "next/link"
+
+import Link from "next/link" 
 import { useEffect, useState } from "react"
-import { createclient } from  "../lib/supabase"
-import { createClient } from "@supabase/supabase-js"
+import { supabase } from "../lib/supabase" 
 
 export default function Navbar() {
-
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        const supabase = createClient()
-
         supabase.auth.getUser().then(({ data }) => {
             setUser(data.user)
         })
@@ -19,21 +16,22 @@ export default function Navbar() {
 
     return (
         <nav className="flex justify-between items-center p-4 bg-black text-white">
-
-            <link href="/">
+            {}
+            <Link href="/">
                 <h1 className="text-xl font-bold">Tienda</h1>
-            </link>
+            </Link>
 
             <div className="flex gap-4">
                 {!user && (
                     <>
-                        <link href="/login" >Iniciar sesion</link>
-                        <link href="/register">Crear cuenta</link>
+                        {}
+                        <Link href="/login">Iniciar sesión</Link>
+                        <Link href="/register">Crear cuenta</Link>
                     </>
                 )}
 
                 {user && (
-                    <link href="/user">Mi cuenta</link>
+                    <Link href="/user">Mi cuenta</Link>
                 )}
             </div>
         </nav>
